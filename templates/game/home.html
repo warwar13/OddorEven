@@ -1,0 +1,28 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+    <div class="container vh-100">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 text-center">
+                <br>
+                <h1>Odd or Even</h1>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <hr>
+        <div class="row ">
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary btn-rounded">Odd</button>
+            </div>
+            <div class="col-6 text-left">
+                <button type="button" class="btn btn-default btn-rounded">Even</button>
+
+            </div>
+        </div>
+    <p>Balance : {{ balance }}</p>
+    </div>
+
+
+{% endblock %}

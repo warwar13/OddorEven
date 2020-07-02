@@ -1,0 +1,107 @@
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    {% include 'home/links.html' %}
+</head>
+<body class="stylish-color">
+{% include 'home/nav.html' %}
+<br>
+<div class="container lighten-5">
+    <div class="row lighten-5">
+        <div class="col-3"></div>
+        <div class="col-6 ">
+
+            {% if user.is_authenticated %}
+
+                {% include 'home/404.html' %}
+
+            {% else %}
+                <!-- Material form login -->
+                <div class="card animated jackInTheBox">
+
+                    <h5 class="card-header info-color white-text text-center py-4">
+                        <strong>Sign in</strong>
+                    </h5>
+
+                    <!--Card content-->
+                    <div class="card-body px-lg-5 pt-0">
+
+                        <!-- Form -->
+
+
+                        <form method="post" class="text-center " style="color: #757575;" action="{% url 'home:login' %}">
+
+                            {% csrf_token %}
+                            <!-- Email -->
+                            <div class="md-form">
+                                {{ form.username.errors }}
+                                {{ form.username|add_class:"form-control" }}
+                                <label for="materialLoginFormEmail">Username</label>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="md-form">
+                                {{ form.password.errors }}
+                                {{ form.password|add_class:"form-control" }}
+                                <label for="materialLoginFormPassword">Password</label>
+                            </div>
+
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <!-- Remember me -->
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                                        <label class="form-check-label" for="materialLoginFormRemember">Remember
+                                            me</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Forgot password -->
+                                    <a href="">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <!-- Sign in button -->
+                            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                                    type="submit">Sign in
+                            </button>
+                            <input type="hidden" name="next" value="{{ next }}"/>
+
+                            <!-- Register -->
+                            <p>Not a member?
+                                <a href="#">Register</a>
+                            </p>
+
+
+                        </form>
+                        <!-- Form -->
+
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ form.non_field_errors }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+
+                </div>
+                <!-- Material form login -->
+            {% endif %}
+
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+{% include 'home/js.html' %}
+</html>

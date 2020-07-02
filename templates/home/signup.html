@@ -1,0 +1,131 @@
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+   {% include 'home/links.html' %}
+</head>
+<body class="stylish-color">
+{% include 'home/nav.html' %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6"><!-- Default form register -->
+            {% if user.is_authenticated %}
+                {% include 'home/404.html' %}
+            {% else %}
+                <!-- Material form register -->
+            <div class="card animated jackInTheBox">
+
+                <h5 class="card-header info-color white-text text-center py-4">
+                    <strong>Sign up</strong>
+                </h5>
+
+                <!--Card content-->
+                <div class="card-body px-lg-5 pt-0">
+
+                    <!-- Form -->
+
+                    <form method="post" class="text-center" style="color: #757575;" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <br>
+                            <div class="alert alert-danger alert-dismissible fade show text-left" role="alert">
+                                <p>{{ form.first_name.errors.as_text }}</p>
+                                <p>{{ form.last_name.errors.as_text }}</p>
+                                <p>{{ form.username.errors.as_text }}</p>
+                                <p>{{ form.email.errors.as_text }}</p>
+                                <p>{{ form.password1.errors.as_text }}</p>
+                                <p>{{ form.password2.errors.as_text }}</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+
+                        <div class="form-row">
+
+                            <div class="col">
+                                <!-- First name -->
+                                <div class="md-form">
+
+                                    {{ form.first_name|add_class:"form-control" }}
+                                    <label for="materialRegisterFormFirstName">First name</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Last name -->
+                                <div class="md-form">
+
+                                    {{ form.last_name|add_class:"form-control" }}
+                                    <label for="materialRegisterFormLastName">Last name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-form mt-0">
+
+                            {{ form.username|add_class:"form-control" }}
+                            <label for="">Username</label>
+                        </div>
+                        <!-- E-mail -->
+                        <div class="md-form mt-0">
+
+                            {{ form.email|add_class:"form-control" }}
+                            <label for="materialRegisterFormEmail">E-mail</label>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="md-form">
+
+                            {{ form.password1|add_class:"form-control" }}
+
+                            <label for="materialRegisterFormPassword">Password</label>
+                            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                                At least 8 characters and 1 digit
+                            </small>
+                        </div>
+                        <div class="md-form">
+
+                            {{ form.password2|add_class:"form-control" }}
+                            <label for="materialRegisterFormPassword">Confirm Password</label>
+
+                        </div>
+
+
+                        <!-- Sign up button -->
+                        <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                                type="submit">Sign in
+                        </button>
+
+                        <!-- Register -->
+                        <p>Already a member?
+                            <a href="{% url 'login' %}">Sign in</a>
+                        </p>
+
+                        <hr>
+
+                        <!-- Terms of service -->
+                        <p>By clicking
+                            <em>Sign up</em> you agree to our
+                            <a href="" target="_blank">terms of service</a>
+
+                    </form>
+                    <!-- Form -->
+
+                </div>
+
+            </div>
+            <!-- Material form register -->
+            {% endif %}
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>
+</body>
+{% include 'home/js.html' %}
+</html>
